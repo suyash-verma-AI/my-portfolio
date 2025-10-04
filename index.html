@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suyash-Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0ea5e9',
+                        secondary: '#7e22ce',
+                        dark: '#0f172a',
+                        darker: '#020617',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #0ea5e9, #7e22ce);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(14, 165, 233, 0.2);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(90deg, #0ea5e9, #7e22ce);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .active::after {
+            width: 100%;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            left: -7.5px;
+            top: 0;
+            background: linear-gradient(135deg, #0ea5e9, #7e22ce);
+        }
+
+        .skill-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #1e293b;
+        }
+
+        .skill-progress {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #0ea5e9, #7e22ce);
+            transition: width 1s ease-in-out;
+        }
+
+        .project-card {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            box-shadow: 5px 5px 15px rgba(2, 6, 23, 0.5),
+                -5px -5px 15px rgba(30, 41, 59, 0.5);
+        }
+
+        .contact-input {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            transition: all 0.3s ease;
+        }
+
+        .contact-input:focus {
+            border-color: #0ea5e9;
+            box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, #0ea5e9, #7e22ce);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(14, 165, 233, 0.3);
+        }
+
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body class="bg-dark text-slate-200">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-darker/80 backdrop-blur-sm z-50 shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold gradient-text">Portfolio</a>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-slate-200 hover:text-primary focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link active">Home</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-2">
+                <a href="#home" class="block py-2 nav-link active">Home</a>
+                <a href="#about" class="block py-2 nav-link">About</a>
+                <a href="#skills" class="block py-2 nav-link">Skills</a>
+                <a href="#projects" class="block py-2 nav-link">Projects</a>
+                <a href="#contact" class="block py-2 nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+<!-- Hero Section (Polished) -->
+<section id="home" class="min-h-screen flex items-center pt-20" data-aos="zoom-in" data-aos-easing="ease-in-out">
+    <div class="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between">
+        <!-- Text Content -->
+        <div class="md:w-1/2 mb-12 md:mb-0">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">
+                Hi, I'm <span class="gradient-text">Suyash Verma</span>
+            </h1>
+            <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-slate-300">
+                Backend Developer | Python, Flask & SQL
+            </h2>
+            <p class="text-lg mb-8 text-slate-400 max-w-lg">
+                “I specialize in building robust web applications using Python, Flask, and SQL/SQLite. I design
+                efficient backend systems and RESTful APIs to power scalable and modern web applications.”
+            </p>
+            <div class="flex space-x-4">
+                <a href="#contact" class="px-6 py-3 rounded-full btn-primary font-medium shadow-lg hover:shadow-xl transition-all duration-300">
+                    Let’s Work Together
+                </a>
+                <a href="#projects" class="px-6 py-3 rounded-full border border-primary text-primary font-medium hover:bg-primary/10 hover:scale-105 transition-all duration-300">
+                    Explore Projects
+                </a>
+            </div>
+            <!-- Social Links -->
+            <div class="flex mt-8 space-x-4">
+                <a href="https://github.com/suyash-verma-AI" target="_blank" class="social-icon text-xl w-10 h-10 flex items-center justify-center rounded-full bg-slate-800 hover:bg-primary hover:scale-110 transition-all duration-300">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/suyash-verma-ai" target="_blank" class="social-icon text-xl w-10 h-10 flex items-center justify-center rounded-full bg-slate-800 hover:bg-blue-600 hover:scale-110 transition-all duration-300">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://www.instagram.com/ft.suyashhh?igsh=MWlhcnR5bm1oeHQxcg==" class="social-icon text-xl w-10 h-10 flex items-center justify-center rounded-full bg-slate-800 hover:bg-pink-500 hover:scale-110 transition-all duration-300">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+        <!-- Profile Image -->
+        <div class="md:w-1/2 flex justify-center">
+            <div class="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
+                <div class="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-secondary blur-xl opacity-20"></div>
+                <img src="Images/suyash.jpg" alt="Profile" class="relative w-full h-full object-cover rounded-full border-4 border-slate-800 floating animate-float">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Tailwind Animation -->
+<style>
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+</style>
+
+<!-- About Section (Polished) -->
+<section id="about" class="py-20 bg-darker" data-aos="fade-up" data-aos-easing="ease-in-out">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">About <span class="gradient-text">Me</span></h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
+            <p class="text-slate-400 mt-4 italic">“Coding is not just work, it’s my craft”</p>
+        </div>
+
+        <div class="flex flex-col md:flex-row items-center">
+            <!-- Profile Image -->
+            <div class="md:w-1/3 mb-8 md:mb-0 flex justify-center" data-aos="fade-right">
+                <div class="relative w-64 h-64 hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary to-secondary blur-xl opacity-20"></div>
+                    <img src="Images/suyash.jpg" alt="Suyash Verma" class="relative w-full h-full object-cover rounded-2xl border-4 border-slate-800 shadow-lg">
+                </div>
+            </div>
+
+            <!-- About Info -->
+            <div class="md:w-2/3 md:pl-12" data-aos="fade-left">
+                <h3 class="text-2xl font-bold mb-6">Who am I?</h3>
+                <p class="text-slate-400 mb-6">
+                    I'm Suyash Verma, a passionate backend developer specializing in Python, Flask, and SQL/SQLite.
+                    I design scalable, maintainable, and efficient backend systems and RESTful APIs for modern web applications.
+                </p>
+
+                <div class="flex flex-col md:flex-row md:space-x-12 space-y-6 md:space-y-0 mb-8">
+                    <div class="flex flex-col space-y-2">
+                        <h4 class="font-semibold">Name: <span class="text-slate-300">Suyash Verma</span></h4>
+                        <h4 class="font-semibold">Email: <span class="text-slate-300">suyashverma0023@gmail.com</span></h4>
+                        <h4 class="font-semibold">Phone: <span class="text-slate-300">+91-9343941061</span></h4>
+                    </div>
+                    <div class="flex flex-col space-y-2">
+                        <h4 class="font-semibold">Age: <span class="text-slate-300">20</span></h4>
+                        <h4 class="font-semibold">Experience: <span class="text-slate-300">Portfolio Projects & College Work</span></h4>
+                        <h4 class="font-semibold">Location: <span class="text-slate-300">Indore, India</span></h4>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="flex space-x-4">
+                    <a href="SuyashResume.pdf" download="Suyash_Verma_Resume.pdf" class="px-6 py-3 rounded-full btn-primary font-medium shadow-lg hover:shadow-xl transition-all duration-300">
+                        Download RESUME
+                    </a>
+                    <a href="#contact" class="px-6 py-3 rounded-full border border-primary text-primary font-medium hover:bg-primary/10 hover:scale-105 transition-all duration-300">
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Achievements Section (Polished & Animated with More Gap) -->
+<section class="py-20 bg-slate-900" data-aos="fade-left" data-aos-easing="ease-in-out">
+  <div class="max-w-5xl mx-auto px-6">
+    <h3 class="text-3xl font-bold text-center mb-12">
+      My <span class="gradient-text">Achievements</span>
+    </h3>
+
+    <div class="relative border-l border-slate-700 ml-8 space-y-12">
+      <!-- Achievement 1 -->
+      <div class="ml-10 flex flex-col md:flex-row md:items-center md:space-x-8 relative group" data-aos="fade-up" data-aos-delay="100">
+        <span
+          class="absolute flex items-center justify-center w-10 h-10 bg-primary rounded-full -left-6 ring-4 ring-slate-900 transition-transform duration-300 group-hover:scale-125 group-hover:rotate-12">
+          🎓
+        </span>
+        <div class="bg-slate-800 p-5 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+          <h4 class="text-xl font-semibold text-white">Academic Excellence</h4>
+          <p class="text-slate-300 text-sm mt-2">
+            Scored <span class="font-bold text-white counter" data-target="94">0</span>% in 10th and
+            <span class="font-bold text-white counter" data-target="90">0</span>% in 12th board exams.
+          </p>
+        </div>
+      </div>
+
+      <!-- Achievement 2 -->
+      <div class="ml-10 flex flex-col md:flex-row md:items-center md:space-x-8 relative group" data-aos="fade-up" data-aos-delay="200">
+        <span
+          class="absolute flex items-center justify-center w-10 h-10 bg-primary rounded-full -left-6 ring-4 ring-slate-900 transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-12">
+          🏅
+        </span>
+        <div class="bg-slate-800 p-5 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+          <h4 class="text-xl font-semibold text-white">Merit Recognition</h4>
+          <p class="text-slate-300 text-sm mt-2">
+            Secured a <span class="font-bold text-white">TFW (Tuition Fee Waiver)</span> seat at CDGI through
+            <span class="font-bold text-white">JEE percentile</span>.
+          </p>
+        </div>
+      </div>
+
+      <!-- Achievement 3 -->
+      <div class="ml-10 flex flex-col md:flex-row md:items-center md:space-x-8 relative group" data-aos="fade-up" data-aos-delay="300">
+        <span
+          class="absolute flex items-center justify-center w-10 h-10 bg-primary rounded-full -left-6 ring-4 ring-slate-900 transition-transform duration-300 group-hover:scale-125 group-hover:rotate-6">
+          🧮
+        </span>
+        <div class="bg-slate-800 p-5 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+          <h4 class="text-xl font-semibold text-white">Competitions</h4>
+          <p class="text-slate-300 text-sm mt-2">
+            Won <span class="font-bold text-white">1st Prize</span> in a Mathematics Quiz on
+            <span class="font-bold text-white">Ramanujan Day</span> at Bansal Group of Colleges, Indore.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Counter Script -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const counters = document.querySelectorAll('.counter');
+    counters.forEach(counter => {
+        const updateCount = () => {
+            const target = +counter.getAttribute('data-target');
+            const count = +counter.innerText;
+            const increment = target / 200;
+
+            if(count < target){
+                counter.innerText = Math.ceil(count + increment);
+                setTimeout(updateCount, 10);
+            } else {
+                counter.innerText = target;
+            }
+        }
+        updateCount();
+    });
+});
+</script>
+
+
+
+<!-- Skills Section (Polished & Animated) -->
+<section id="skills" class="py-20 bg-dark" data-aos="fade-right" data-aos-easing="ease-in-out">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">My <span class="gradient-text">Skills</span></h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <!-- Technical Skills -->
+            <div>
+                <h3 class="text-2xl font-bold mb-6">Technical Skills</h3>
+                <div class="space-y-6">
+
+                    <div class="skill-item" data-aos="fade-right" data-aos-delay="100">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center space-x-2">
+                                
+                                <span class="font-medium">Python</span>
+                            </div>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-800 rounded-full h-3">
+                            <div class="skill-progress bg-primary h-3 w-0 rounded-full transition-all duration-1000 ease-in-out" data-width="90%"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item" data-aos="fade-right" data-aos-delay="150">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center space-x-2">
+                               
+                                <span class="font-medium">Flask</span>
+                            </div>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-800 rounded-full h-3">
+                            <div class="skill-progress bg-primary h-3 w-0 rounded-full transition-all duration-1000 ease-in-out" data-width="85%"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item" data-aos="fade-right" data-aos-delay="200">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center space-x-2">
+                               
+                                <span class="font-medium">SQL / SQLite</span>
+                            </div>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-800 rounded-full h-3">
+                            <div class="skill-progress bg-primary h-3 w-0 rounded-full transition-all duration-1000 ease-in-out" data-width="80%"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item" data-aos="fade-right" data-aos-delay="250">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center space-x-2">
+                                
+                                <span class="font-medium">HTML / CSS / JavaScript</span>
+                            </div>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-800 rounded-full h-3">
+                            <div class="skill-progress bg-primary h-3 w-0 rounded-full transition-all duration-1000 ease-in-out" data-width="85%"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item" data-aos="fade-right" data-aos-delay="300">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center space-x-2">
+                               
+                                <span class="font-medium">Git & GitHub</span>
+                            </div>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-800 rounded-full h-3">
+                            <div class="skill-progress bg-primary h-3 w-0 rounded-full transition-all duration-1000 ease-in-out" data-width="75%"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Professional Skills -->
+            <div>
+                <h3 class="text-2xl font-bold mb-6">Professional Skills</h3>
+                <div class="space-y-6">
+                    <div class="skill-item" data-aos="fade-left" data-aos-delay="100">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Problem Solving</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-800 rounded-full h-3">
+                            <div class="skill-progress bg-secondary h-3 w-0 rounded-full transition-all duration-1000 ease-in-out" data-width="90%"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item" data-aos="fade-left" data-aos-delay="150">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Teamwork</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-800 rounded-full h-3">
+                            <div class="skill-progress bg-secondary h-3 w-0 rounded-full transition-all duration-1000 ease-in-out" data-width="80%"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item" data-aos="fade-left" data-aos-delay="200">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Communication</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-800 rounded-full h-3">
+                            <div class="skill-progress bg-secondary h-3 w-0 rounded-full transition-all duration-1000 ease-in-out" data-width="85%"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item" data-aos="fade-left" data-aos-delay="250">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Adaptability</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-800 rounded-full h-3">
+                            <div class="skill-progress bg-secondary h-3 w-0 rounded-full transition-all duration-1000 ease-in-out" data-width="80%"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Progress Bar Script -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const skillBars = document.querySelectorAll('.skill-progress');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                const width = entry.target.getAttribute('data-width');
+                entry.target.style.width = width;
+            }
+        });
+    }, { threshold: 0.5 });
+
+    skillBars.forEach(bar => observer.observe(bar));
+});
+</script>
+
+
+<!-- Tools & Technologies (Polished) -->
+<section data-aos="zoom-in" data-aos-easing="ease-in-out">
+    <div class="mt-16">
+        <h3 class="text-2xl md:text-3xl font-bold mb-12 text-center">
+            Tools & <span class="gradient-text">Technologies</span>
+        </h3>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+            <!-- Core -->
+            <div class="flex flex-col items-center p-6 bg-slate-800 rounded-lg card-hover transform transition duration-500 hover:scale-110 hover:rotate-3">
+                <i class="fab fa-python text-4xl text-yellow-400 mb-2"></i>
+                <span class="text-slate-300 font-medium">Python</span>
+            </div>
+            <div class="flex flex-col items-center p-6 bg-slate-800 rounded-lg card-hover transform transition duration-500 hover:scale-110 hover:-rotate-3">
+                <i class="fas fa-code text-4xl text-teal-400 mb-2"></i>
+                <span class="text-slate-300 font-medium">Flask</span>
+            </div>
+            <div class="flex flex-col items-center p-6 bg-slate-800 rounded-lg card-hover transform transition duration-500 hover:scale-110 hover:rotate-2">
+                <i class="fas fa-database text-4xl text-blue-400 mb-2"></i>
+                <span class="text-slate-300 font-medium">SQLite</span>
+            </div>
+
+            <!-- Web Basics -->
+            <div class="flex flex-col items-center p-6 bg-slate-800 rounded-lg card-hover transform transition duration-500 hover:scale-110 hover:-rotate-2">
+                <i class="fab fa-html5 text-4xl text-orange-500 mb-2"></i>
+                <span class="text-slate-300 font-medium">HTML5</span>
+            </div>
+            <div class="flex flex-col items-center p-6 bg-slate-800 rounded-lg card-hover transform transition duration-500 hover:scale-110 hover:rotate-3">
+                <i class="fab fa-css3-alt text-4xl text-blue-500 mb-2"></i>
+                <span class="text-slate-300 font-medium">CSS3</span>
+            </div>
+            <div class="flex flex-col items-center p-6 bg-slate-800 rounded-lg card-hover transform transition duration-500 hover:scale-110 hover:-rotate-3">
+                <i class="fab fa-js text-4xl text-yellow-400 mb-2"></i>
+                <span class="text-slate-300 font-medium">JavaScript</span>
+            </div>
+
+            <!-- Tools -->
+            <div class="flex flex-col items-center p-6 bg-slate-800 rounded-lg card-hover transform transition duration-500 hover:scale-110 hover:rotate-3">
+                <i class="fab fa-git-alt text-4xl text-orange-600 mb-2"></i>
+                <span class="text-slate-300 font-medium">Git & GitHub</span>
+            </div>
+            <div class="flex flex-col items-center p-6 bg-slate-800 rounded-lg card-hover transform transition duration-500 hover:scale-110 hover:-rotate-2">
+                <i class="fas fa-terminal text-4xl text-gray-300 mb-2"></i>
+                <span class="text-slate-300 font-medium">VS Code</span>
+            </div>
+            <div class="flex flex-col items-center p-6 bg-slate-800 rounded-lg card-hover transform transition duration-500 hover:scale-110 hover:rotate-2">
+                <i class="fas fa-vial text-4xl text-green-400 mb-2"></i>
+                <span class="text-slate-300 font-medium">Postman</span>
+            </div>
+            <div class="flex flex-col items-center p-6 bg-slate-800 rounded-lg card-hover transform transition duration-500 hover:scale-110 hover:-rotate-3">
+                <i class="fab fa-linux text-4xl text-white mb-2"></i>
+                <span class="text-slate-300 font-medium">Linux</span>
+            </div>
+
+            <!-- Deployment -->
+            <div class="flex flex-col items-center p-6 bg-slate-800 rounded-lg card-hover transform transition duration-500 hover:scale-110 hover:rotate-3">
+                <i class="fas fa-cloud text-4xl text-indigo-400 mb-2"></i>
+                <span class="text-slate-300 font-medium">Heroku</span>
+            </div>
+            <div class="flex flex-col items-center p-6 bg-slate-800 rounded-lg card-hover transform transition duration-500 hover:scale-110 hover:-rotate-2">
+                <i class="fas fa-server text-4xl text-purple-400 mb-2"></i>
+                <span class="text-slate-300 font-medium">Render</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Projects Section -->
+
+    <section id="projects" class="py-20 bg-darker" data-aos="fade-up" data-aos-easing="ease-in-out">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">My <span class="gradient-text">Projects</span></h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1: Jarvis -->
+                <div class="project-card rounded-xl overflow-hidden card-hover bg-slate-800 shadow-lg" data-aos="zoom-out">
+                    <div class="h-48 overflow-hidden">
+                        <img src="images/jarvis.png" alt="Jarvis Assistant" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Jarvis – Personal Voice Assistant</h3>
+                        <p class="text-slate-400 mb-4">
+                            A voice-controlled AI assistant using Python, SpeechRecognition, pyttsx3, and APIs.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-primary/30 rounded-full text-sm">Python</span>
+                            <span class="px-3 py-1 bg-primary/30 rounded-full text-sm">SpeechRecognition</span>
+                            <span class="px-3 py-1 bg-primary/30 rounded-full text-sm">API</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-primary hover:text-secondary"><i
+                                    class="fas fa-external-link-alt"></i> Live Demo</a>
+                            <a href="https://github.com/suyash-verma-AI/jarvis-assistant"
+                                class="text-primary hover:text-secondary"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Weather App -->
+                <div class="project-card rounded-xl overflow-hidden card-hover bg-slate-800 shadow-lg" data-aos="zoom-out">
+                    <div class="h-48 overflow-hidden">
+                        <img src="images/weather.png" alt="Weather App" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Weather App</h3>
+                        <p class="text-slate-400 mb-4">
+                            Responsive web app fetching real-time weather data using OpenWeatherMap API.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-primary/30 rounded-full text-sm">HTML</span>
+                            <span class="px-3 py-1 bg-primary/30 rounded-full text-sm">CSS</span>
+                            <span class="px-3 py-1 bg-primary/30 rounded-full text-sm">JavaScript</span>
+                            <span class="px-3 py-1 bg-primary/30 rounded-full text-sm">API</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-primary hover:text-secondary"><i
+                                    class="fas fa-external-link-alt"></i> Live Demo</a>
+                            <a href="https://github.com/suyash-verma-AI/weather-app"
+                                class="text-primary hover:text-secondary"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Bank Management System -->
+                <div class="project-card rounded-xl overflow-hidden card-hover bg-slate-800 shadow-lg" data-aos="zoom-out">
+                    <div class="h-48 overflow-hidden">
+                        <img src="images/bank.png" alt="Bank Management System" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Bank Management System</h3>
+                        <p class="text-slate-400 mb-4">
+                            Console-based banking system in C with account creation, deposit, withdrawal & balance
+                            inquiry.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-primary/30 rounded-full text-sm">C</span>
+                            <span class="px-3 py-1 bg-primary/30 rounded-full text-sm">File Handling</span>
+                            <span class="px-3 py-1 bg-primary/30 rounded-full text-sm">Algorithms</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-primary hover:text-secondary"><i
+                                    class="fas fa-external-link-alt"></i> Live Demo</a>
+                            <a href="#" class="text-primary hover:text-secondary"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="#" class="px-8 py-3 rounded-full btn-primary font-medium inline-flex items-center">
+                    View All Projects <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+<!-- Contact Section (Polished) -->
+<section id="contact" class="py-20 bg-dark" data-aos="fade-right" data-aos-easing="ease-in-out">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Get In <span class="gradient-text">Touch</span></h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Contact Info -->
+            <div data-aos="fade-right" data-aos-delay="100">
+                <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+                <p class="text-slate-400 mb-8">
+                    Feel free to reach out to me for any questions or opportunities.
+                    I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.
+                </p>
+
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <div class="bg-slate-800 p-3 rounded-full mr-4 transition-all duration-300 hover:bg-primary">
+                            <i class="fas fa-map-marker-alt text-primary text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-1">Location</h4>
+                            <p class="text-slate-400">Indore, India</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="bg-slate-800 p-3 rounded-full mr-4 transition-all duration-300 hover:bg-primary">
+                            <i class="fas fa-envelope text-primary text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-1">Email</h4>
+                            <p class="text-slate-400">suyashverma0023@gmail.com</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="bg-slate-800 p-3 rounded-full mr-4 transition-all duration-300 hover:bg-primary">
+                            <i class="fas fa-phone-alt text-primary text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-1">Phone</h4>
+                            <p class="text-slate-400">+91-9343941061</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Links -->
+                <div class="mt-8 flex space-x-4" data-aos="fade-up" data-aos-delay="200">
+                    <a href="https://github.com/suyash-verma-AI" target="_blank" class="social-icon w-12 h-12 flex items-center justify-center rounded-full bg-slate-800 hover:bg-primary hover:scale-110 transition-all duration-300">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/suyash-verma-ai" target="_blank" class="social-icon w-12 h-12 flex items-center justify-center rounded-full bg-slate-800 hover:bg-blue-600 hover:scale-110 transition-all duration-300">
+                        <i class="fab fa-linkedin-in text-xl"></i>
+                    </a>
+                    <a href="https://www.instagram.com/ft.suyashhh?igsh=MWlhcnR5bm1oeHQxcg==" target="_blank" class="social-icon w-12 h-12 flex items-center justify-center rounded-full bg-slate-800 hover:bg-pink-500 hover:scale-110 transition-all duration-300">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div data-aos="fade-left" data-aos-delay="100">
+                <h3 class="text-2xl font-bold mb-6">Send Me a Message</h3>
+                <form action="https://formspree.io/f/mnngvrrr" method="POST" class="space-y-6 contact-form">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="name" class="block mb-2 font-medium">Your Name</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-lg contact-input focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300" required>
+                        </div>
+                        <div>
+                            <label for="email" class="block mb-2 font-medium">Your Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-lg contact-input focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="subject" class="block mb-2 font-medium">Subject</label>
+                        <input type="text" id="subject" name="subject" class="w-full px-4 py-3 rounded-lg contact-input focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300" required>
+                    </div>
+                    <div>
+                        <label for="message" class="block mb-2 font-medium">Message</label>
+                        <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 rounded-lg contact-input focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300" required></textarea>
+                    </div>
+                    <button type="submit" class="px-8 py-3 rounded-full btn-primary font-medium w-full hover:scale-105 transition-all duration-300">
+                        Send Message <i class="fas fa-paper-plane ml-2"></i>
+                    </button>
+                </form>
+
+                <!-- Success Message Modal (Hidden initially) -->
+                <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+                    <div class="bg-dark p-6 rounded-lg text-center max-w-sm w-full">
+                        <h4 class="text-xl font-bold mb-4 text-white">Message Sent!</h4>
+                        <p class="text-slate-400 mb-4">Thanks for reaching out. I will get back to you soon.</p>
+                        <button onclick="document.getElementById('successModal').classList.add('hidden')" class="px-6 py-2 bg-primary rounded-full text-white font-medium hover:bg-secondary transition-all duration-300">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- JS for Form Success Modal -->
+<script>
+document.querySelector('.contact-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    // You can integrate Formspree or fetch API here
+    // Show modal for demo
+    document.getElementById('successModal').classList.remove('hidden');
+    this.reset();
+});
+</script>
+
+<!-- Footer (Polished) -->
+<footer class="bg-darker py-12 relative">
+    <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-6 md:mb-0 text-center md:text-left" data-aos="fade-up">
+                <a href="#home" class="text-2xl font-bold gradient-text hover:scale-105 transition-transform duration-300">Suyash Verma</a>
+                <p class="text-slate-400 mt-2">© 2025 Suyash Verma. All rights reserved.</p>
+            </div>
+
+            <div class="flex space-x-6" data-aos="fade-up" >
+                <a href="https://github.com/suyash-verma-AI" target="_blank"
+                    class="text-slate-400 hover:text-white hover:scale-110 transition-all duration-300">
+                    <i class="fab fa-github text-xl"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/suyash-verma-ai" target="_blank"
+                    class="text-slate-400 hover:text-blue-600 hover:scale-110 transition-all duration-300">
+                    <i class="fab fa-linkedin-in text-xl"></i>
+                </a>
+                <a href="https://www.instagram.com/ft.suyashhh?igsh=MWlhcnR5bm1oeHQxcg==" target="_blank"
+                    class="text-slate-400 hover:text-pink-500 hover:scale-110 transition-all duration-300">
+                    <i class="fab fa-instagram text-xl"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="border-t border-slate-800 mt-8 pt-8 text-center text-slate-500">
+            <p>Made with <i class="fas fa-heart text-red-500 animate-pulse"></i> and lots of <i class="fas fa-coffee text-amber-500"></i></p>
+        </div>
+    </div>
+</footer>
+
+<!-- Back to Top Button -->
+<button id="back-to-top"
+    class="fixed bottom-8 right-8 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white shadow-lg opacity-0 pointer-events-none transition-all duration-300 hover:scale-110">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- Smooth Scroll & Back-to-Top JS -->
+<script>
+    // Smooth scroll for all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    // Back-to-top button
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+        if(window.scrollY > 300) {
+            backToTop.classList.remove('opacity-0', 'pointer-events-none');
+            backToTop.classList.add('opacity-100', 'pointer-events-auto');
+        } else {
+            backToTop.classList.remove('opacity-100', 'pointer-events-auto');
+            backToTop.classList.add('opacity-0', 'pointer-events-none');
+        }
+    });
+
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+
+                    // Update active link
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Update active link on scroll
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+
+            document.querySelectorAll('section').forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+
+            // Show/hide back to top button
+            const backToTopButton = document.getElementById('back-to-top');
+            if (scrollPosition > 300) {
+                backToTopButton.classList.remove('hidden');
+            } else {
+                backToTopButton.classList.add('hidden');
+            }
+        });
+
+        // Back to top button
+        document.getElementById('back-to-top').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Animate skill bars on scroll
+        const animateSkillBars = () => {
+            const skillBars = document.querySelectorAll('.skill-progress');
+            const skillsSection = document.getElementById('skills');
+            const skillsSectionTop = skillsSection.offsetTop;
+            const windowHeight = window.innerHeight;
+
+            if (window.scrollY > skillsSectionTop - windowHeight + 200) {
+                skillBars.forEach(bar => {
+                    const width = bar.style.width;
+                    bar.style.width = '0';
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 100);
+                });
+
+                // Remove event listener after animation
+                window.removeEventListener('scroll', animateSkillBars);
+            }
+        };
+
+        window.addEventListener('scroll', animateSkillBars);
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+
+</body>
+
+</html>
